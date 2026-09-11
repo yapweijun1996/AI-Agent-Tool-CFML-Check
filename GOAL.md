@@ -1,0 +1,42 @@
+# Goal: Verified Agent CFML Check
+
+## Outcome
+
+Deliver a trustworthy `agent-cfml-check` tool that deterministically checks bounded CFML structure without executing source or claiming runtime compatibility that has not been tested.
+
+The immediate target is a release-ready `0.1.0` feasibility product. Grammar expansion and semantic/runtime analysis are separate future scopes.
+
+## Verification surface
+
+Completion is evaluated against:
+
+- repository source, generated `dist/`, package metadata, and JSON Schema;
+- unit and CLI regression tests;
+- typecheck, clean packed-install smoke, and schema validation;
+- authorized Lucee and Adobe ColdFusion compatibility evidence;
+- independent platform evidence;
+- canonical Hub/repository ownership, admission, provenance, and publication evidence.
+
+## Constraints
+
+- Read exactly one explicitly selected `.cfm` or `.cfc` file under an explicit root.
+- Never execute CFML, follow includes, access network/database, or modify inspected source.
+- Fail closed for unsupported syntax, unstable input, and exhausted limits.
+- Preserve stable envelope, finding, coordinate, and exit-code semantics.
+- Keep source code as behavior authority and do not convert plans or KB notes into facts.
+
+## Boundaries
+
+The current profile excludes full CFML grammar, expression/type/runtime semantics, HTML/SQL validity, directory/project analysis, include expansion, engine compatibility, and custom/imported tags. Installed-package library imports are also not supported until package exports are defined and tested.
+
+## Iteration policy
+
+Choose the smallest next task that closes a documented evidence gap. After each change, update the owning document, run focused checks, then run regression and packaging checks. Do not expand parser scope while release gates remain unresolved.
+
+## Blocked stop condition
+
+Stop and report evidence gathered, attempted paths, blocker, and required input when compatibility engines, independent platform access, canonical ownership, package-surface decision, release authorization, or required validation tooling is unavailable. Do not guess or publish around a missing gate.
+
+## Current stage
+
+The local feasibility implementation is complete. Contract hardening and external release evidence remain pending.

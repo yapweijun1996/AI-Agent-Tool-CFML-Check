@@ -1,32 +1,116 @@
 # Agent CFML Check Specification
 
-## Feasibility slice
+**Status:** frozen feasibility contract for implementation baseline `1d5c768`
+**Tool version:** `0.1.0`
+**Profile:** `cfml-structure-v1`
+**Envelope schema:** `schema/agent-cfml-check-result-v1.schema.json`
 
-This worktree implements the first vertical slice of the Hub's `agent-cfml-check` design. The implementation deliberately uses a small lexer and stack instead of claiming a complete CFML grammar. The public profile is `cfml-structure-v1` and the package version is `0.1.0`.
+## 1. Scope
 
-## Operations
+The tool performs deterministic, read-only structural checks on exactly one explicitly selected local UTF-8 `.cfm` or `.cfc` file under an explicitly supplied root. It does not execute CFML, resolve includes, inspect a directory as source input, use the network, or modify the inspected source tree.
 
-- `capabilities` reports the supported tags, profile, exclusions, and effective limits.
-- `check --root <directory> <file>` reads exactly one `.cfm` or `.cfc` file and reports a completed structural verdict or a fail-closed incomplete/error envelope.
+A completed result proves only the checks listed in that result. It does not prove Lucee or Adobe ColdFusion execution compatibility.
 
-## Supported structures
+## 2. Operations and interfaces
 
-Paired bodies are `cfif`, `cfloop`, `cfoutput`, `cfquery`, `cfsavecontent`, `cfsilent`, `cfcomponent`, `cffunction`, and `cfscript`. Branches are `cfelse` and `cfelseif`. Bodyless tags are `cfset`, `cfreturn`, `cfinclude`, `cfargument`, and `cfqueryparam`; both ordinary and self-closing spellings are accepted, while closing a bodyless tag is unsupported.
+### CLI operations
 
-CFML comments are nested and ignored. Tag attributes respect quoted strings, doubled quote escapes, and comments inside the tag expression. HTML comments do not suppress server-side CFML detection. Embedded `cfscript` regions respect strings and line/block comments while checking `()`, `[]`, and `{}`. A recognized pure-script `.cfc` begins with `component` or `interface` and receives the same delimiter check.
+```text
+agent-cfml-check capabilities [--json] [--pretty]
+agent-cfml-check check --root <directory> <file> [--json] [--pretty]
+```
 
-## Result contract
+`capabilities` reports the profile, operations, extensions, tag catalogue, effective default limits, and exclusions. The CLI does not accept a file, root, or check-limit override for this operation.
 
-The JSON envelope follows the Hub `1.0.0` target: `status` is `ok`, `incomplete`, or `error`; `complete` is false for the latter two; `data` is withheld for incomplete/error results. A completed structural violation is still `status: "ok"`, with `data.verdict: "violations"` and ordered findings.
+`check` requires exactly one explicit root and one `.cfm` or `.cfc` file. `--pretty` requires `--json`. `--help` prints usage and `--version` prints `0.1.0`; neither may be combined with other options.
 
-Finding locations contain one-based line/column positions plus zero-based UTF-8 byte ranges `[start_byte, end_byte)`. Findings use stable codes such as `UNEXPECTED_CLOSE`, `MISMATCHED_CLOSE`, `UNCLOSED_TAG`, `INVALID_BRANCH`, `UNTERMINATED_STRING`, `UNTERMINATED_COMMENT`, and `UNBALANCED_DELIMITER`.
+### TypeScript interface
 
-## Security and limits
+`src/index.ts` exports `capabilities`, `checkFile`, `DEFAULT_LIMITS`, `HARD_LIMITS`, `normalizeLimits`, and schema types. The source exports exist, but package metadata currently lacks `main`/`exports`; installed-package library imports are not yet a verified contract.
 
-The explicit root is checked lexically and after realpath resolution; symlink escapes are rejected. Input is one regular UTF-8 file, with an optional BOM. NUL-containing input, invalid UTF-8, unsupported extensions, changed source snapshots, and invalid limits are rejected. The default source, nesting, finding, output, and time limits are 2 MiB, 256, 100, 64 KiB, and 5 seconds; hard caps are 16 MiB, 1,024, 1,000, 1 MiB, and 30 seconds.
+The TypeScript `capabilities(limitsInput)` API may receive limit overrides, while the CLI `capabilities` operation rejects them.
 
-No result is silently clipped. Unsupported syntax and resource exhaustion return exit `3` with `data: null`. The checker does not retry, execute project code, follow includes, access the network, or write the inspected repository.
+## 3. Supported structures
 
-## Evidence boundary
+### Paired bodies
 
-The tests cover the first feasibility cases CF-01 through CF-13, with a pure-script CFC case. CF-14 engine comparison is not executed. The test suite demonstrates this implementation's behavior; it is not evidence of Lucee or Adobe CF compatibility.
+`cfcomponent`, `cffunction`, `cfif`, `cfloop`, `cfoutput`, `cfquery`, `cfsavecontent`, `cfscript`, and `cfsilent` require matching closing tags and cannot be self-closing.
+
+### Branches
+
+`cfelse` and `cfelseif` must belong to the directly open `cfif`. Only one `cfelse` is accepted, and `cfelseif` cannot follow `cfelse`.
+
+### Bodyless tags
+
+`cfargument`, `cfinclude`, `cfqueryparam`, `cfreturn`, and `cfset` are standalone. Ordinary and self-closing spellings are accepted. Closing a bodyless tag is unsupported.
+
+Tag names are case-insensitive. Unknown, custom, imported, and unlisted tags are unsupported.
+
+### Comments, attributes, and scripts
+
+- Nested `<!--- ... --->` CFML comments are ignored for tag detection.
+- Quoted tag attributes respect backslash escapes, doubled quote escapes, and CFML comments inside the tag expression.
+- HTML comments do not suppress CFML tag detection.
+- Embedded `cfscript` respects quoted strings, `//` line comments, and `/* ... */` block comments while checking `()`, `[]`, and `{}`.
+- CFML tag islands inside `cfscript` are unsupported.
+- A `.cfc` beginning with `component` or `interface` after an optional BOM receives the pure-script delimiter check. A `.cfc` without recognized CFML tags or a recognized pure-script entry is incomplete/unsupported.
+
+## 4. Findings
+
+Completed structural findings use these codes:
+
+- `UNEXPECTED_CLOSE`
+- `MISMATCHED_CLOSE`
+- `UNCLOSED_TAG`
+- `INVALID_BRANCH`
+- `UNTERMINATED_STRING`
+- `UNTERMINATED_COMMENT`
+- `UNBALANCED_DELIMITER`
+
+Each finding contains a message, one-based line/column positions, a zero-based UTF-8 byte range `[start_byte, end_byte)`, and a related opening location or `null`. Findings are ordered by start byte and then code.
+
+## 5. Result envelope
+
+Every JSON result contains `schema_version`, `tool`, `status`, `complete`, `data`, `errors`, `warnings`, and `meta`.
+
+For `status: "ok"`, `complete` is `true`, `errors` is empty, and `data` is present. A completed structural violation remains `status: "ok"`, with `data.verdict: "violations"` and exit `0`.
+
+For `status: "incomplete"` or `"error"`, `complete` is `false`, `data` is `null`, and at least one error is present. No partial success is returned when evidence or a resource limit is insufficient.
+
+Check data contains the profile, source path/SHA-256/byte size/UTF-8/BOM metadata, verdict `pass` or `violations`, checks `tag-nesting`, `branch-structure`, and `cfscript-delimiters`, exclusions, and findings. Capabilities data contains the profile, operations, extensions, supported tags, limits, and exclusions.
+
+## 6. Limits
+
+| Limit | Default | Hard cap |
+|---|---:|---:|
+| `max_source_bytes` | 2 MiB | 16 MiB |
+| `max_nesting` | 256 | 1,024 |
+| `max_findings` | 100 | 1,000 |
+| `max_output_bytes` | 64 KiB | 1 MiB |
+| `time_limit_ms` | 5,000 | 30,000 |
+
+Requested limits must be positive safe integers and cannot exceed hard caps. Reaching a limit returns a fail-closed result rather than partial data.
+
+## 7. Input and safety behavior
+
+The source reader requires `.cfm` or `.cfc`, an existing root and file, realpath containment, a regular file, valid UTF-8, no NUL byte, and an effective source-size limit. It checks size and modification time before and after reading and rejects a changed snapshot. Symlink escapes are rejected.
+
+Known envelope error codes include `INVALID_ARGUMENT`, `INVALID_LIMIT`, `UNSUPPORTED_EXTENSION`, `ROOT_NOT_FOUND`, `FILE_NOT_FOUND`, `PATH_UNRESOLVED`, `FILE_OUTSIDE_ROOT`, `LIMIT_EXCEEDED`, `SOURCE_CHANGED`, `BINARY_INPUT`, `ENCODING_UNSUPPORTED`, `UNSUPPORTED_SYNTAX`, and `INTERNAL_ERROR`.
+
+## 8. Exit codes and output
+
+| Code | Meaning |
+|---:|---|
+| `0` | Completed capabilities or check, including `violations` |
+| `1` | Unexpected internal failure without a safe result |
+| `2` | Invalid argument, limit, extension, or ordinary input rejection |
+| `3` | Unsupported syntax, incomplete evidence, source change, or resource limit |
+| `4` | Explicit-root, path-resolution, or access-policy rejection |
+
+JSON mode emits one envelope on stdout; failure diagnostics are also written to stderr. Pretty JSON is intentionally multi-line but remains one JSON envelope.
+
+## 9. Evidence boundary
+
+The profile does not validate full CFML grammar, expression/type/runtime semantics, HTML, SQL, include expansion, directory/project context, Lucee/Adobe execution, unknown/custom/imported tags, or CFML tag islands inside `cfscript`. Package publication, Hub lifecycle, cross-platform compatibility, and installed-package library imports are also outside current verified evidence.
+
+The repository tests cover CF-01 through CF-13, pure-script `.cfc` handling, and three CLI behaviors. Current local evidence is 17/17 tests, typecheck pass, package dry-run pass, and Windows CLI smoke checks. JSON Schema validation, engine comparison, non-Windows verification, and publication remain pending.
