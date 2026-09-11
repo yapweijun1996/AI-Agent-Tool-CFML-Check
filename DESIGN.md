@@ -97,7 +97,7 @@ The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `
 - The tag catalogue is incomplete and unknown/custom/imported tags fail closed.
 - The lexical scanner does not establish full CFML string/expression semantics.
 - Lucee and Adobe ColdFusion behavior is unverified.
-- A targeted Lucee `6.2.2.91` probe and Ubuntu WSL Node `18.19.1` install/test/typecheck run pass. Full engine behavior, Adobe compatibility, canonical Hub ownership/admission, and registry parity remain unverified; npm publication and current packed-install behavior are verified.
+- A targeted Lucee `6.2.2.91` probe and Ubuntu WSL Node `18.19.1` install/test/typecheck run pass. Full engine behavior, Adobe compatibility, and canonical Hub ownership/admission remain unverified; npm publication, registry parity, and current packed-install behavior are verified.
 - Expanding grammar, adding include/project analysis, or adding semantic validation requires a new versioned contract, privacy/resource model, and regression evidence.
 
 ## 9. Current evidence

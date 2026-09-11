@@ -12,6 +12,6 @@ Document boundaries:
 - PROGRESS.md: current evidence snapshot, gaps, blockers, and next action.
 - GOAL_PROMPT.md: this brief, under 2000 characters.
 
-Verify version 0.1.1, local npm test 22/22, typecheck, pack dry-run, and CLI smoke evidence. Inspect package exports: src/index.ts and repository metadata expose the library; verify the packed-install CLI/library smoke check before claiming npm support. Keep full engine compatibility, Adobe compatibility, canonical Hub ownership/admission, and registry parity pending until proven. Treat publication as proven only after authenticated npm registry readback.
+Verify version 0.1.1, local npm test 22/22, typecheck, pack dry-run, and CLI smoke evidence. Inspect package exports: src/index.ts and repository metadata expose the library; verify the packed-install CLI/library smoke check before claiming npm support. Keep full engine compatibility, Adobe compatibility, and canonical Hub ownership/admission pending until proven. Treat publication as proven only after authenticated npm registry readback.
 
 Run git diff --check, npm test, npm run typecheck, and npm pack --dry-run --json. Remove temporary test output. Do not change implementation, install dependencies, commit, push, or publish. If evidence conflicts, record the conflict and stop. End every status report with a progress percentage and options A-D."

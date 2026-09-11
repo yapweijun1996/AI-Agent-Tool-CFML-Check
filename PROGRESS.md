@@ -1,8 +1,8 @@
 # Agent CFML Check Progress
 
-**Reviewed against:** release commit `8e2c4d9`
+**Reviewed against:** release commit `8e2c4d9`; status commit `46b3bc8`
 **Version:** `0.1.1`
-**Working-tree state:** post-publication status update pending commit
+**Working-tree state:** clean; status commit `46b3bc8` is pushed
 **Published artifact:** `agent-cfml-check@0.1.1` verified from npm registry
 **Publication note:** the prior immutable `0.1.0` artifact predates the release-hardening changes
 
@@ -55,4 +55,4 @@ No local implementation failure is known. Remaining blockers are Adobe ColdFusio
 
 ## Next action
 
-Complete registry parity review, then pursue external compatibility and canonical admission.
+Pursue canonical admission, then complete the full Lucee/Adobe compatibility matrix when Adobe ColdFusion is available.
