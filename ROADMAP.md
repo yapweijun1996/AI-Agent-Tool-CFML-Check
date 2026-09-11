@@ -1,7 +1,7 @@
 # Agent CFML Check Roadmap
 
 **Implementation baseline:** `0.1.0` at commit `1d5c768`
-**Overall state:** local feasibility complete; release readiness pending
+**Overall state:** local feasibility complete; CLI package published; release hardening pending
 
 ## Phase 0 — Feasibility implementation (Complete)
 
@@ -41,8 +41,13 @@ Evidence: 17/17 tests, typecheck, package dry-run, and Windows CLI probes pass.
 
 ### 1.5 Publication
 
-- Confirm registry, provenance, package metadata, release authorization, and release checks.
-- Publish only after package, compatibility, canonical, and platform gates pass.
+**Status: Complete for the `0.1.0` CLI artifact; broader release gates remain open.**
+
+- npm authentication and registry readback verify `agent-cfml-check@0.1.0`.
+- The published tarball and integrity metadata are available from the npm registry.
+- Publication does not close the remaining contract, compatibility, canonical, platform, or library-package gates.
+- Compare the immutable registry README/SPEC with the current repository docs; use a new authorized version if registry documentation must be corrected.
+- For future releases, confirm registry, provenance, package metadata, release authorization, and release checks before publishing.
 
 ## Phase 2 — Contract evolution (Unscheduled)
 
@@ -59,6 +64,6 @@ Evidence: 17/17 tests, typecheck, package dry-run, and Windows CLI probes pass.
 5. engine compatibility — pending;
 6. canonical Hub/repository — pending;
 7. cross-platform — pending;
-8. publication/operations — pending.
+8. publication/operations — CLI publication passed; registry documentation parity and broader release operations remain pending.
 
 No publication date or compatibility promise is implied.

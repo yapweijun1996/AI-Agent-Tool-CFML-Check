@@ -8,4 +8,4 @@
 - Added explicit-root containment, realpath/symlink escape protection, UTF-8 validation, source snapshot checks, SHA-256 source metadata, and bounded resource limits.
 - Added JSON/text CLI operations, typed exports, result JSON Schema, fixtures, tests, generated `dist/`, and package metadata.
 - Local verification: 17 tests passed, typecheck passed, and package dry-run passed.
-- Lucee/Adobe compatibility, canonical Hub handoff, publication, and cross-platform verification remain pending.
+- Published `agent-cfml-check@0.1.0` to npm; registry version, tarball, and integrity readback verified. The immutable registry README/SPEC may predate later repository documentation synchronization. Lucee/Adobe compatibility, canonical Hub handoff, library-package exports, and cross-platform verification remain pending.

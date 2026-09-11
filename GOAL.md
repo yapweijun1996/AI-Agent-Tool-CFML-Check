@@ -4,7 +4,7 @@
 
 Deliver a trustworthy `agent-cfml-check` tool that deterministically checks bounded CFML structure without executing source or claiming runtime compatibility that has not been tested.
 
-The immediate target is a release-ready `0.1.0` feasibility product. Grammar expansion and semantic/runtime analysis are separate future scopes.
+The immediate target is a verified `0.1.0` feasibility product and a clearly bounded release path. The CLI artifact is now published; grammar expansion and semantic/runtime analysis are separate future scopes.
 
 ## Verification surface
 
@@ -15,7 +15,7 @@ Completion is evaluated against:
 - typecheck, clean packed-install smoke, and schema validation;
 - authorized Lucee and Adobe ColdFusion compatibility evidence;
 - independent platform evidence;
-- canonical Hub/repository ownership, admission, provenance, and publication evidence.
+- canonical Hub/repository ownership, admission, provenance, and publication evidence; publication is satisfied for the current CLI artifact by npm registry readback.
 
 ## Constraints
 
@@ -39,4 +39,4 @@ Stop and report evidence gathered, attempted paths, blocker, and required input 
 
 ## Current stage
 
-The local feasibility implementation is complete. Contract hardening and external release evidence remain pending.
+The local feasibility implementation and CLI publication are complete. Contract hardening and external compatibility/canonical evidence remain pending.

@@ -4,7 +4,7 @@
 
 ## Current status
 
-Version `0.1.0` contains the first feasibility slice. The current implementation is locally verified for:
+Version `0.1.0` contains the first feasibility slice and has been published to the npm registry as `agent-cfml-check@0.1.0`. The current implementation is locally verified for:
 
 - paired CFML tag nesting;
 - `cfelse` and `cfelseif` ownership and ordering;
@@ -24,7 +24,7 @@ Verification at repository commit `1d5c768`:
 - `npm pack --dry-run --json`: passed;
 - capabilities, valid-fixture, and misnested-fixture CLI checks: passed.
 
-This is not yet a published package, a complete CFML parser, or evidence of Lucee/Adobe ColdFusion compatibility. Hub lifecycle and publication status remain outside this repository's locally verified implementation evidence.
+The npm publication of `agent-cfml-check@0.1.0` is verified by registry readback. The immutable registry artifact was published before this post-publication documentation status sync, so its README/SPEC may predate the current working-tree wording; a new authorized version is required to update registry documentation. This is not a complete CFML parser or evidence of Lucee/Adobe ColdFusion compatibility. Hub lifecycle, canonical ownership, admission, cross-platform compatibility, and library-package exports remain outside the current verified evidence.
 
 ## Install and use
 

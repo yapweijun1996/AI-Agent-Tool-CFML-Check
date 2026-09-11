@@ -2,7 +2,7 @@
 
 **Epic ID:** `CFML-CHECK-001`
 **Implementation baseline:** `0.1.0` at commit `1d5c768`
-**Status:** feasibility complete; release readiness pending
+**Status:** feasibility complete; CLI package published; release hardening pending
 
 ## Goal
 
@@ -31,7 +31,8 @@ Deliver a deterministic, read-only `agent-cfml-check` tool that establishes boun
 | Adobe ColdFusion compatibility | Pending | Authorized engine matrix required |
 | Canonical Hub/repository handoff | Pending | External ownership/admission evidence required |
 | Independent non-Windows verification | Pending | Clean-checkout evidence required |
-| Public package publication | Pending | Release authorization and registry evidence required |
+| Public CLI package publication | Done | npm identity and registry readback verify `agent-cfml-check@0.1.0` and its tarball |
+| Published artifact documentation parity | Pending | Compare immutable registry README/SPEC with current repository docs; use a new authorized version if correction is required |
 
 ## Completed work
 
@@ -48,7 +49,7 @@ No local implementation check is failing. Release readiness is blocked by missin
 - engine compatibility is unverified;
 - canonical Hub/repository ownership and admission are unconfirmed;
 - cross-platform evidence is absent;
-- publication has not been authorized or executed;
+- the published CLI artifact does not close the remaining compatibility, canonical, platform, schema, or package-library gates;
 - installed-package library imports are not exposed by current package metadata;
 - schema validation is not part of the executable test suite.
 
@@ -64,5 +65,5 @@ Runtime: Node.js `>=18.18.0`. Development: TypeScript `^5.7.0` and `@types/node 
 2. Add executable JSON Schema validation and negative contract tests.
 3. Confirm canonical Hub/repository ownership and admission.
 4. Run authorized Lucee/Adobe and non-Windows verification.
-5. Publish only after all release gates and authorization are complete.
+5. Perform a post-publication provenance and install smoke review; do not imply that publication closes the remaining gates.
 6. Handle grammar expansion as a separately versioned epic.

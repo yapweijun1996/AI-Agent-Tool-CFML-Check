@@ -2,11 +2,13 @@
 
 **Reviewed against:** implementation baseline `1d5c768`
 **Version:** `0.1.0`
-**Working-tree state:** documentation changes are not yet committed
+**Working-tree state:** documentation changes for the post-publication status are not yet committed
+**Published artifact:** `agent-cfml-check@0.1.0` verified from npm registry
+**Publication note:** the immutable registry README/SPEC predates this post-publication documentation sync and may require a new version for parity
 
 ## Executive status
 
-The deterministic feasibility slice is complete and locally verified. The project is not yet release-ready because compatibility, canonical ownership/admission, package surface, cross-platform, schema-validation, and publication gates remain open.
+The deterministic feasibility slice is complete and locally verified. The CLI artifact is published, but the project is not yet fully release-ready because compatibility, canonical ownership/admission, package surface, cross-platform, and schema-validation gates remain open.
 
 ## Completed implementation
 
@@ -26,7 +28,8 @@ The deterministic feasibility slice is complete and locally verified. The projec
 - `npm run typecheck`: passed;
 - `npm pack --dry-run --json`: passed;
 - capabilities, valid fixture, and misnested fixture CLI probes: passed on Windows;
-- working tree excludes `node_modules` and temporary `.test-dist/` output.
+- working tree excludes `node_modules` and temporary `.test-dist/` output;
+- `npm whoami` and `npm view agent-cfml-check@0.1.0` verify the published registry artifact.
 
 ## Open work
 
@@ -35,7 +38,7 @@ The deterministic feasibility slice is complete and locally verified. The projec
 3. Run packed-install CLI smoke tests.
 4. Confirm canonical Hub/repository identity and admission.
 5. Run authorized Lucee, Adobe ColdFusion, and independent non-Windows verification.
-6. Obtain release authorization and publish only after all gates pass.
+6. Compare published README/SPEC with the current tree, then perform post-publication provenance/install review; use a new authorized version if registry documentation needs correction.
 
 ## Blockers
 
@@ -44,8 +47,8 @@ No local implementation failure is known. Remaining blockers are external eviden
 ## Progress accounting
 
 - Feasibility implementation: **100% complete**.
-- Release gate path: **2/8 gates passed** (implementation regression and package assembly), or **25%** by gate count. This is a planning indicator, not a quality score.
+- Release gate path: **3/8 gates passed** (implementation regression, package assembly, and CLI publication), or **37.5%** by gate count. This is a planning indicator, not a quality score.
 
 ## Next action
 
-Resolve the CLI-only versus library-package decision, then add the matching packed-install and contract-validation tests before pursuing external compatibility or publication.
+Resolve the CLI-only versus library-package decision, then add packed-install and contract-validation tests before pursuing external compatibility and canonical admission.

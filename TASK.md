@@ -35,21 +35,23 @@
 | CFML-021 | Run authorized Lucee compatibility comparison | Pending | Supported-profile matrix and recorded differences |
 | CFML-022 | Run authorized Adobe ColdFusion comparison | Pending | Supported-profile matrix and recorded differences |
 | CFML-023 | Verify independent non-Windows platform | Pending | Clean-checkout platform evidence |
-| CFML-024 | Decide and execute package publication | Pending | Authorization, provenance, registry result, artifact verification |
+| CFML-024 | Decide and execute CLI package publication | Done | npm identity, registry version/tarball/integrity readback for `agent-cfml-check@0.1.0` |
 
 ## Unscheduled scope
 
 | ID | Task | Status | Boundary |
 |---|---|---|---|
-| CFML-025 | Expand tag catalogue/full grammar | Unscheduled | New compatibility and versioned contract required |
-| CFML-026 | Add include-aware/directory/project analysis | Unscheduled | New privacy, resource, and failure model required |
-| CFML-027 | Add expression/semantic validation | Unscheduled | Outside current structural profile |
+| CFML-025 | Reconcile published artifact documentation with current repository docs | Pending | Compare immutable registry README/SPEC; release a new authorized version if correction is required |
+| CFML-026 | Expand tag catalogue/full grammar | Unscheduled | New compatibility and versioned contract required |
+| CFML-027 | Add include-aware/directory/project analysis | Unscheduled | New privacy, resource, and failure model required |
+| CFML-028 | Add expression/semantic validation | Unscheduled | Outside current structural profile |
 
 ## Blockers and risks
 
 - No local implementation task is failing.
-- Release tasks are blocked by missing external evidence, package-surface decisions, or authorization, not by the current 17 passing tests.
-- The current package metadata does not expose a verified installed-package library import.
+- Remaining release tasks are blocked by missing external evidence or package-surface decisions, not by the current 17 passing tests; CLI publication itself is complete.
+- The published package metadata does not expose a verified installed-package library import.
+- The immutable registry README/SPEC may predate the current post-publication documentation sync.
 - JSON Schema is an artifact but not yet an executable test gate.
 - Unknown/custom/imported tags and unsupported constructs fail closed by design.
 
