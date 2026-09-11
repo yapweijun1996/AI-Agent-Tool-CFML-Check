@@ -78,7 +78,7 @@ The core is synchronous and has no runtime npm dependency, network call, databas
 
 ## 6. Package surface decision
 
-The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `src/index.ts` exports `capabilities`, `checkFile`, limits, and types. The repository declares `main`, `types`, and conditional `exports` for the library entry. Package-surface tests and a temporary packed-install CLI/library smoke check verify the current repository artifact. The published `agent-cfml-check@0.1.1` artifact includes this metadata and is verified through registry readback and temporary packed-install CLI/library smoke checks.
+The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `src/index.ts` exports `capabilities`, `checkFile`, limits, and types. The repository declares `main`, `types`, and conditional `exports` for the library entry. Package-surface tests and a temporary packed-install CLI/library smoke check verify the current repository artifact. The release candidate `agent-cfml-check@0.1.1` includes this metadata and is verified through temporary packed-install CLI/library smoke checks; authenticated registry readback remains required.
 
 ## 7. Dependencies
 
@@ -101,4 +101,4 @@ The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `
 
 ## 9. Current evidence
 
-The pre-onboarding implementation baseline passed 17/17 tests. The current release-hardening tree passes 22/22 tests, typecheck, package dry-run, capabilities/valid/misnested CLI probes, JSON Schema validation, temporary packed-install CLI/library smoke checks, and registry readback for `agent-cfml-check@0.1.1`. These checks prove local implementation, package, CLI publication, targeted Lucee, and Ubuntu WSL evidence only; they do not prove a complete engine matrix or release readiness.
+The pre-onboarding implementation baseline passed 17/17 tests. The current release-hardening tree passes 22/22 tests, typecheck, package dry-run, capabilities/valid/misnested CLI probes, JSON Schema validation, and temporary packed-install CLI/library smoke checks. The `0.1.1` release candidate is ready for authenticated npm publication and registry readback. These checks prove local implementation, package, CLI publication, targeted Lucee, and Ubuntu WSL evidence only; they do not prove a complete engine matrix or release readiness.

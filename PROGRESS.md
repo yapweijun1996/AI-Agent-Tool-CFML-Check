@@ -1,8 +1,8 @@
 # Agent CFML Check Progress
 
-**Reviewed against:** release-hardening source; final commit pending
+**Reviewed against:** release-hardening source; final publication commit pending
 **Version:** `0.1.1`
-**Working-tree state:** release-hardening changes pending commit
+**Working-tree state:** release-hardening documentation correction pending commit
 **Published artifact:** `agent-cfml-check@0.1.1` pending final registry readback
 **Publication note:** the prior immutable `0.1.0` artifact predates the release-hardening changes
 

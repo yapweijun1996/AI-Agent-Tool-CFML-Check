@@ -27,7 +27,7 @@ Local verification before this documentation update:
 - targeted Lucee `6.2.2.91` execution probe: passed;
 - Ubuntu WSL Node `18.19.1` `npm ci`, tests, and typecheck: passed.
 
-The prior npm publication of `agent-cfml-check@0.1.0` is immutable and predates this release's schema, package-export, and documentation updates. This release targets `agent-cfml-check@0.1.1`. This is not a complete CFML parser or evidence of Adobe ColdFusion compatibility. A targeted Lucee `6.2.2.91` probe and an Ubuntu WSL Node `18.19.1` clean dependency install/test run pass; these do not establish a full engine matrix. Hub lifecycle, canonical ownership, admission, and Adobe compatibility remain outside the current verified evidence.
+The prior npm publication of `agent-cfml-check@0.1.0` is immutable and predates this release's schema, package-export, and documentation updates. This release targets `agent-cfml-check@0.1.1`; authenticated registry publication/readback is the final release step. This is not a complete CFML parser or evidence of Adobe ColdFusion compatibility. A targeted Lucee `6.2.2.91` probe and an Ubuntu WSL Node `18.19.1` clean dependency install/test run pass; these do not establish a full engine matrix. Hub lifecycle, canonical ownership, admission, and Adobe compatibility remain outside the current verified evidence.
 
 ## Install and use
 
