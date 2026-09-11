@@ -1,7 +1,7 @@
 # Agent CFML Check Roadmap
 
 **Implementation baseline:** `0.1.1` release-hardening commit pending
-**Overall state:** local feasibility complete; CLI package published; release hardening pending
+**Overall state:** local feasibility and release hardening complete; external compatibility and canonical admission pending
 
 ## Phase 0 — Feasibility implementation (Complete)
 
@@ -20,7 +20,7 @@ Evidence: 22/22 tests, typecheck, package dry-run, Windows CLI probes, schema va
 
 - Package metadata now declares `main`, `types`, and `exports`; local self-reference tests pass.
 - Temporary packed-install CLI and library import smoke checks pass.
-- Release target `0.1.1` is prepared; verify final registry metadata and documentation parity after publication.
+- `0.1.1` is published; registry version, tarball/integrity, exports, README/SPEC parity, and registry-install CLI/library smoke pass.
 - Keep `dist/` aligned with source.
 
 ### 1.2 Contract validation
@@ -42,12 +42,12 @@ Evidence: 22/22 tests, typecheck, package dry-run, Windows CLI probes, schema va
 
 ### 1.5 Publication
 
-**Status: Pending final `0.1.1` registry readback; broader release gates remain open.**
+**Status: Complete for `0.1.1`; broader compatibility and governance gates remain open.**
 
-- npm authentication is verified; `agent-cfml-check@0.1.1` registry version, tarball, and integrity readback remain required.
+- npm authentication and registry readback verify `agent-cfml-check@0.1.1`.
 - The published tarball and integrity metadata are available from the npm registry.
-- Publication does not close the remaining contract, compatibility, canonical, platform, or library-package gates.
-- Compare the immutable registry README/SPEC/exports with the current repository docs after publication.
+- Publication does not close the remaining engine-compatibility or canonical-admission gates.
+- Registry README/SPEC and package exports match the published repository artifact.
 - For future releases, confirm registry, provenance, package metadata, release authorization, and release checks before publishing.
 
 ## Phase 2 — Contract evolution (Unscheduled)
@@ -61,10 +61,10 @@ Evidence: 22/22 tests, typecheck, package dry-run, Windows CLI probes, schema va
 1. implementation regression — passed;
 2. package assembly — passed by dry-run;
 3. contract/schema validation — passed with Ajv;
-4. package surface metadata, schema validation, and packed-install smoke — passed locally; registry parity remains pending;
+4. package surface metadata, packed-install smoke, and registry parity — passed;
 5. engine compatibility — targeted Lucee probe passed; full Lucee/Adobe matrix pending;
 6. canonical Hub/repository — pending;
-7. cross-platform — Ubuntu WSL evidence passed; broader matrix pending;
-8. publication/operations — 0.1.0 CLI publication passed; 0.1.1 publication and registry documentation parity remain pending.
+7. cross-platform — Ubuntu WSL evidence passed; broader matrix remains optional evidence;
+8. publication/operations — 0.1.1 publication, integrity readback, registry install, and GitHub CI passed.
 
 No publication date or compatibility promise is implied.

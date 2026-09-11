@@ -8,7 +8,7 @@
 - Verified CLI and library imports from a temporary packed install.
 - Added executable JSON Schema validation with Ajv.
 - Recorded targeted Lucee 6.2.2.91 and Ubuntu WSL Node 18.19.1 verification.
-- The prior `0.1.0` artifact predates these changes; `0.1.1` adds them to the npm package.
+- Published `agent-cfml-check@0.1.1` with these changes; registry readback and registry-install CLI/library smoke checks pass.
 
 ## 0.1.0 — feasibility slice
 

@@ -1,14 +1,14 @@
 # Agent CFML Check Progress
 
-**Reviewed against:** release-hardening source; final publication commit pending
+**Reviewed against:** release commit `8e2c4d9`
 **Version:** `0.1.1`
-**Working-tree state:** release-hardening documentation correction pending commit
-**Published artifact:** `agent-cfml-check@0.1.1` pending final registry readback
+**Working-tree state:** post-publication status update pending commit
+**Published artifact:** `agent-cfml-check@0.1.1` verified from npm registry
 **Publication note:** the prior immutable `0.1.0` artifact predates the release-hardening changes
 
 ## Executive status
 
-The deterministic feasibility slice and release hardening are locally verified. Targeted Lucee and Ubuntu WSL evidence now pass. The project is not yet fully release-ready because full engine compatibility, Adobe ColdFusion, canonical ownership/admission, and registry-parity gates remain open.
+The deterministic feasibility slice and release hardening are locally verified. Targeted Lucee and Ubuntu WSL evidence now pass. The project is not yet fully release-ready because full engine compatibility, Adobe ColdFusion, and canonical ownership/admission remain open.
 
 ## Completed implementation
 
@@ -34,25 +34,24 @@ The deterministic feasibility slice and release hardening are locally verified. 
 - targeted Lucee 6.2.2.91 execution probe: passed;
 - Ubuntu WSL Node 18.19.1 npm ci, 22/22 tests, and typecheck: passed;
 - repository-local Agent Skill is present;
-- GitHub CI for commit c76b8be: completed successfully; 0.1.1 release-hardening CI is pending the new push;
+- GitHub CI for release commit 8e2c4d9: all Node 18.18.0/20/22 jobs completed successfully;
 - working tree excludes `node_modules` and temporary `.test-dist/` output;
-- `npm whoami` verifies the authenticated npm identity; 0.1.1 registry readback is pending publication;
+- npm registry readback: version/latest, tarball shasum/integrity, README/SPEC parity, package exports, registry-install CLI, and registry library import passed;
+- `npm whoami` verifies the authenticated npm identity;
 
 ## Open work
 
-1. Push the release-hardening commit and let its GitHub CI complete.
-2. Publish 0.1.1 and complete registry readback/documentation parity review.
-3. Confirm canonical Hub/repository identity and admission.
-4. Run the full authorized Lucee/Adobe compatibility matrix when Adobe ColdFusion is available.
+1. Confirm canonical Hub/repository identity and admission.
+2. Run the full authorized Lucee/Adobe compatibility matrix when Adobe ColdFusion is available.
 
 ## Blockers
 
-No local implementation failure is known. Remaining blockers are Adobe ColdFusion access, full engine-matrix evidence, canonical ownership/admission, and registry parity.
+No local implementation failure is known. Remaining blockers are Adobe ColdFusion access, full engine-matrix evidence, and canonical ownership/admission.
 
 ## Progress accounting
 
 - Feasibility implementation: **100% complete**.
-- Release gate path: **6/8 gates passed** (implementation regression, package assembly, executable schema, package surface/packed-install, publication, and GitHub CI), or **75%** by gate count. Full engine compatibility, Adobe compatibility, canonical ownership/admission, and registry parity remain open. This is a planning indicator, not a quality score.
+- Release gate path: **6/8 gates passed** (implementation regression, package assembly, executable schema, package surface/packed-install, targeted cross-platform evidence, and publication/CI), or **75%** by gate count. Full engine compatibility, Adobe compatibility, and canonical ownership/admission remain open. Targeted Lucee and Ubuntu WSL evidence do not close the full engine matrix. This is a planning indicator, not a quality score.
 
 ## Next action
 

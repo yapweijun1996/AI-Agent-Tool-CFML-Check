@@ -1,6 +1,6 @@
 # Agent CFML Check Design
 
-**Status:** feasibility package published; release hardening pending
+**Status:** release hardening complete; external compatibility and canonical admission pending
 **Version:** `0.1.1`
 **Implementation baseline:** repository release-hardening commit pending
 
@@ -78,13 +78,14 @@ The core is synchronous and has no runtime npm dependency, network call, databas
 
 ## 6. Package surface decision
 
-The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `src/index.ts` exports `capabilities`, `checkFile`, limits, and types. The repository declares `main`, `types`, and conditional `exports` for the library entry. Package-surface tests and a temporary packed-install CLI/library smoke check verify the current repository artifact. The release candidate `agent-cfml-check@0.1.1` includes this metadata and is verified through temporary packed-install CLI/library smoke checks; authenticated registry readback remains required.
+The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `src/index.ts` exports `capabilities`, `checkFile`, limits, and types. The repository declares `main`, `types`, and conditional `exports` for the library entry. Package-surface tests and a temporary packed-install CLI/library smoke check verify the current repository artifact. The published `agent-cfml-check@0.1.1` artifact includes this metadata; npm registry readback and a temporary registry-install CLI/library smoke check pass.
 
 ## 7. Dependencies
 
 | Dependency | Current contract |
 |---|---|
 | Node.js | `>=18.18.0` runtime |
+| Ajv | `^8.20.0` development/test dependency |
 | TypeScript | `^5.7.0` development/build dependency |
 | `@types/node` | `^22.10.0` development dependency |
 | Runtime npm packages | None |
@@ -101,4 +102,4 @@ The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `
 
 ## 9. Current evidence
 
-The pre-onboarding implementation baseline passed 17/17 tests. The current release-hardening tree passes 22/22 tests, typecheck, package dry-run, capabilities/valid/misnested CLI probes, JSON Schema validation, and temporary packed-install CLI/library smoke checks. The `0.1.1` release candidate is ready for authenticated npm publication and registry readback. These checks prove local implementation, package, CLI publication, targeted Lucee, and Ubuntu WSL evidence only; they do not prove a complete engine matrix or release readiness.
+The pre-onboarding implementation baseline passed 17/17 tests. The current release-hardening tree passes 22/22 tests, typecheck, package dry-run, capabilities/valid/misnested CLI probes, JSON Schema validation, and temporary packed-install CLI/library smoke checks. The `0.1.1` publication, registry readback, and GitHub CI verification are complete. These checks prove local implementation, package, CLI publication, targeted Lucee, and Ubuntu WSL evidence only; they do not prove a complete engine matrix or release readiness.

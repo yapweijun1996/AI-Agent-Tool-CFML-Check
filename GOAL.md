@@ -4,7 +4,7 @@
 
 Deliver a trustworthy `agent-cfml-check` tool that deterministically checks bounded CFML structure without executing source or claiming runtime compatibility that has not been tested.
 
-The immediate target is a verified `0.1.1` feasibility product and a clearly bounded release path. The CLI artifact is published; grammar expansion and semantic/runtime analysis are separate future scopes.
+The immediate target is a verified `0.1.1` feasibility product and a clearly bounded release path. The CLI artifact is published and registry-verified; grammar expansion and semantic/runtime analysis are separate future scopes.
 
 ## Verification surface
 
@@ -27,7 +27,7 @@ Completion is evaluated against:
 
 ## Boundaries
 
-The current profile excludes full CFML grammar, expression/type/runtime semantics, HTML/SQL validity, directory/project analysis, include expansion, engine compatibility, and custom/imported tags. Repository package exports, executable schema validation, and temporary packed-install CLI/library imports are verified; registry parity for the current release must still be read back.
+The current profile excludes full CFML grammar, expression/type/runtime semantics, HTML/SQL validity, directory/project analysis, include expansion, engine compatibility, and custom/imported tags. Repository package exports, executable schema validation, and temporary packed-install CLI/library imports are verified; registry parity for the current release is verified.
 
 ## Iteration policy
 
@@ -39,4 +39,4 @@ Stop and report evidence gathered, attempted paths, blocker, and required input 
 
 ## Current stage
 
-The local feasibility implementation, contract hardening, and CLI publication are complete. External compatibility and canonical evidence remain pending.
+The local feasibility implementation, contract hardening, CLI publication, and registry verification are complete. Full external compatibility and canonical evidence remain pending.

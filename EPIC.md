@@ -2,7 +2,7 @@
 
 **Epic ID:** `CFML-CHECK-001`
 **Implementation baseline:** `0.1.1` release-hardening commit pending
-**Status:** feasibility complete; CLI package published; release hardening pending
+**Status:** feasibility and release hardening complete; external compatibility and canonical admission pending
 
 ## Goal
 
@@ -31,8 +31,8 @@ Deliver a deterministic, read-only `agent-cfml-check` tool that establishes boun
 | Adobe ColdFusion compatibility | Pending | Authorized engine matrix required |
 | Canonical Hub/repository handoff | Pending | External ownership/admission evidence required |
 | Independent non-Windows verification | Done targeted | Ubuntu WSL Node 18.19.1 npm ci, 22/22 tests, and typecheck pass; broader platform matrix is not claimed |
-| Public CLI package publication | Pending final readback | 0.1.1 release package prepared; authenticated registry version, tarball, and integrity readback required |
-| Published artifact documentation/package parity | Pending | Compare registry README/SPEC/exports with current repository; use a new authorized version if correction is required |
+| Public CLI package publication | Done | npm registry version, tarball, integrity, and registry-install CLI/library readback verify `agent-cfml-check@0.1.1` |
+| Published artifact documentation/package parity | Done | Registry README/SPEC and package exports match the repository release artifact |
 
 ## Completed work
 
@@ -49,21 +49,18 @@ No local implementation check is failing. Release readiness is blocked by missin
 - only a targeted Lucee probe is verified; full engine compatibility and Adobe ColdFusion compatibility are unverified;
 - canonical Hub/repository ownership and admission are unconfirmed;
 - broader cross-platform coverage beyond Ubuntu WSL is absent;
-- the published CLI artifact does not close the remaining compatibility, canonical, platform, schema, or registry-parity gates;
-- the prior published `0.1.0` artifact predates the repository's package export, schema, and documentation hardening;
-- full Lucee/Adobe engine compatibility and broader platform coverage remain unverified.
+- the published CLI artifact does not close the remaining engine-compatibility or canonical-admission gates;
+- the prior published `0.1.0` artifact predates the repository's package export, schema, and documentation hardening; `0.1.1` contains the release-hardening changes;
+- full Lucee/Adobe engine compatibility and canonical Hub admission remain unverified.
 
 The bounded catalogue and lexical semantics are intentional scope limits, not defects to silently remove.
 
 ## Dependencies
 
-Runtime: Node.js `>=18.18.0`. Development: TypeScript `^5.7.0` and `@types/node ^22.10.0`. There are no runtime npm, CFML engine, network, or database dependencies for the feasibility slice.
+Runtime: Node.js `>=18.18.0`. Development: Ajv `^8.20.0`, TypeScript `^5.7.0`, and `@types/node ^22.10.0`. There are no runtime npm, CFML engine, network, or database dependencies for the feasibility slice.
 
 ## Next steps
 
-1. Record the release commit and final registry parity readback for `0.1.1`.
-2. Add executable JSON Schema validation and negative contract tests.
-3. Confirm canonical Hub/repository ownership and admission.
-4. Run authorized Lucee/Adobe and non-Windows verification.
-5. Perform a post-publication provenance and install smoke review; do not imply that publication closes the remaining gates.
-6. Handle grammar expansion as a separately versioned epic.
+1. Confirm canonical Hub/repository ownership and admission.
+2. Complete the Lucee/Adobe compatibility matrix when the Adobe runtime is available.
+3. Handle grammar expansion as a separately versioned epic.
