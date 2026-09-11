@@ -26,7 +26,7 @@ agent-cfml-check check --root <directory> <file> [--json] [--pretty]
 
 ### TypeScript interface
 
-`src/index.ts` exports `capabilities`, `checkFile`, `DEFAULT_LIMITS`, `HARD_LIMITS`, `normalizeLimits`, and schema types. The source exports exist, but package metadata currently lacks `main`/`exports`; installed-package library imports are not yet a verified contract.
+`src/index.ts` exports `capabilities`, `checkFile`, `DEFAULT_LIMITS`, `HARD_LIMITS`, `normalizeLimits`, and schema types. Repository package metadata declares `main: "./dist/index.js"`, `types: "./dist/index.d.ts"`, and an import/types `exports` map. Local package-surface tests verify the self-reference; the published `0.1.0` artifact predates this fix and requires a new version for registry consumers.
 
 The TypeScript `capabilities(limitsInput)` API may receive limit overrides, while the CLI `capabilities` operation rejects them.
 
@@ -111,6 +111,6 @@ JSON mode emits one envelope on stdout; failure diagnostics are also written to 
 
 ## 9. Evidence boundary
 
-The profile does not validate full CFML grammar, expression/type/runtime semantics, HTML, SQL, include expansion, directory/project context, Lucee/Adobe execution, unknown/custom/imported tags, or CFML tag islands inside `cfscript`. The `agent-cfml-check@0.1.0` CLI package publication is verified by npm registry readback. Hub lifecycle, canonical ownership/admission, cross-platform compatibility, and installed-package library imports remain outside current verified evidence.
+The profile does not validate full CFML grammar, expression/type/runtime semantics, HTML, SQL, include expansion, directory/project context, Lucee/Adobe execution, unknown/custom/imported tags, or CFML tag islands inside `cfscript`. The `agent-cfml-check@0.1.0` CLI package publication is verified by npm registry readback. Repository package export metadata and temporary packed-install verification are complete, but the published `0.1.0` artifact predates them. Hub lifecycle, canonical ownership/admission, cross-platform compatibility, and registry parity remain outside current verified evidence.
 
-The repository tests cover CF-01 through CF-13, pure-script `.cfc` handling, and three CLI behaviors. Current local evidence is 17/17 tests, typecheck pass, package dry-run pass, and Windows CLI smoke checks. Registry readback verifies `agent-cfml-check@0.1.0`; the immutable registry README/SPEC may predate this post-publication documentation sync. JSON Schema validation, engine comparison, non-Windows verification, canonical Hub admission, and installed-package library imports remain pending.
+The repository tests cover CF-01 through CF-13, pure-script `.cfc` handling, three CLI behaviors, and the package export surface. Current local evidence is 19/19 tests, typecheck pass, package dry-run pass, Windows CLI smoke checks, and temporary packed-install CLI/library smoke checks. Registry readback verifies `agent-cfml-check@0.1.0`; the immutable registry README/SPEC/package metadata may predate this post-publication repository sync. JSON Schema validation, engine comparison, non-Windows verification, canonical Hub admission, and registry parity remain pending.

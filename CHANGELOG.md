@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Added package `main`, `types`, and `exports` metadata with a package self-reference regression test.
+- Added a repository-local Agent Skill at `skills/agent-cfml-check/SKILL.md`.
+- Added GitHub Actions CI for Node 18, 20, and 22 with tests, typecheck, package dry-run, and CLI smoke checks.
+- Verified CLI and library imports from a temporary packed install.
+- The published `0.1.0` artifact predates these changes; a new authorized version is required to distribute them through npm.
+
 ## 0.1.0 — feasibility slice
 
 - Added deterministic, read-only CFML structural checking for a bounded tag profile.

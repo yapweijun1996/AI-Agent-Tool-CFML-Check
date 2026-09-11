@@ -27,7 +27,7 @@ Completion is evaluated against:
 
 ## Boundaries
 
-The current profile excludes full CFML grammar, expression/type/runtime semantics, HTML/SQL validity, directory/project analysis, include expansion, engine compatibility, and custom/imported tags. Installed-package library imports are also not supported until package exports are defined and tested.
+The current profile excludes full CFML grammar, expression/type/runtime semantics, HTML/SQL validity, directory/project analysis, include expansion, engine compatibility, and custom/imported tags. Repository package exports and temporary packed-install CLI/library imports are verified; registry parity remains required before treating npm library imports as released support.
 
 ## Iteration policy
 
@@ -35,7 +35,7 @@ Choose the smallest next task that closes a documented evidence gap. After each 
 
 ## Blocked stop condition
 
-Stop and report evidence gathered, attempted paths, blocker, and required input when compatibility engines, independent platform access, canonical ownership, package-surface decision, release authorization, or required validation tooling is unavailable. Do not guess or publish around a missing gate.
+Stop and report evidence gathered, attempted paths, blocker, and required input when compatibility engines, independent platform access, canonical ownership, release authorization, or required validation tooling is unavailable. Do not guess or publish around a missing gate.
 
 ## Current stage
 

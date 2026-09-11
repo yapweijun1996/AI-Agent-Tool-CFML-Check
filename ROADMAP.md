@@ -12,15 +12,16 @@
 - Provide deterministic CLI capabilities/check operations, text/JSON output, typed source exports, schema, fixtures, tests, and generated `dist/`.
 - Synchronize maintainer documentation.
 
-Evidence: 17/17 tests, typecheck, package dry-run, and Windows CLI probes pass.
+Evidence: 19/19 tests, typecheck, package dry-run, and Windows CLI probes pass.
 
 ## Phase 1 — Contract hardening and release readiness (Pending)
 
 ### 1.1 Package surface
 
-- Decide whether the product is CLI-only or also a package library.
-- If library use is required, add `main`/`exports` and test import from a packed temporary install.
-- Add a clean-install CLI smoke test and verify `dist/` matches source.
+- Package metadata now declares `main`, `types`, and `exports`; local self-reference tests pass.
+- Temporary packed-install CLI and library import smoke checks pass.
+- Publish a new authorized version because npm `0.1.0` predates the export metadata.
+- Keep `dist/` aligned with source.
 
 ### 1.2 Contract validation
 
@@ -46,7 +47,7 @@ Evidence: 17/17 tests, typecheck, package dry-run, and Windows CLI probes pass.
 - npm authentication and registry readback verify `agent-cfml-check@0.1.0`.
 - The published tarball and integrity metadata are available from the npm registry.
 - Publication does not close the remaining contract, compatibility, canonical, platform, or library-package gates.
-- Compare the immutable registry README/SPEC with the current repository docs; use a new authorized version if registry documentation must be corrected.
+- Compare the immutable registry README/SPEC/exports with the current repository docs; use a new authorized version if registry documentation or metadata must be corrected.
 - For future releases, confirm registry, provenance, package metadata, release authorization, and release checks before publishing.
 
 ## Phase 2 — Contract evolution (Unscheduled)
@@ -60,7 +61,7 @@ Evidence: 17/17 tests, typecheck, package dry-run, and Windows CLI probes pass.
 1. implementation regression — passed;
 2. package assembly — passed by dry-run;
 3. contract/schema validation — pending;
-4. package surface/install smoke — pending;
+4. package surface metadata and packed-install smoke — passed locally; registry parity remains pending;
 5. engine compatibility — pending;
 6. canonical Hub/repository — pending;
 7. cross-platform — pending;

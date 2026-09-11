@@ -21,18 +21,18 @@ Deliver a deterministic, read-only `agent-cfml-check` tool that establishes boun
 | Recognized pure-script `.cfc` handling | Done | Component/interface test |
 | UTF-8 positions, byte ranges, hash, and limits | Done | SourceIndex, reader, checker |
 | Deterministic JSON/text CLI behavior | Done | CLI tests and smoke checks |
-| Local regression | Done | `npm test` 17/17; typecheck pass |
+| Local regression | Done | `npm test` 19/19 after package-surface coverage; typecheck pass |
 | Package assembly dry-run | Done | `npm pack --dry-run --json` pass |
 | Documentation synchronization | Done in working tree | DESIGN/SPEC/EPIC/ROADMAP/TASK/GOAL/PROGRESS/GOAL_PROMPT aligned to code |
 | JSON Schema executable validation | Pending | Add validator-backed tests |
-| Installed-package CLI smoke test | Pending | Test from a temporary packed install |
-| Library package export contract | Pending | Add `main`/`exports`, or explicitly define CLI-only scope |
+| Installed-package CLI/library smoke test | Done locally | Temporary packed install runs the CLI and resolves the exported library entry |
+| Library package export contract | Done locally | `main`, `types`, and `exports` added; package self-reference and temporary packed-install import tests pass; published 0.1.0 predates the fix |
 | Lucee compatibility | Pending | Authorized engine matrix required |
 | Adobe ColdFusion compatibility | Pending | Authorized engine matrix required |
 | Canonical Hub/repository handoff | Pending | External ownership/admission evidence required |
 | Independent non-Windows verification | Pending | Clean-checkout evidence required |
 | Public CLI package publication | Done | npm identity and registry readback verify `agent-cfml-check@0.1.0` and its tarball |
-| Published artifact documentation parity | Pending | Compare immutable registry README/SPEC with current repository docs; use a new authorized version if correction is required |
+| Published artifact documentation/package parity | Pending | Compare registry README/SPEC/exports with current repository; use a new authorized version if correction is required |
 
 ## Completed work
 
@@ -49,8 +49,8 @@ No local implementation check is failing. Release readiness is blocked by missin
 - engine compatibility is unverified;
 - canonical Hub/repository ownership and admission are unconfirmed;
 - cross-platform evidence is absent;
-- the published CLI artifact does not close the remaining compatibility, canonical, platform, schema, or package-library gates;
-- installed-package library imports are not exposed by current package metadata;
+- the published CLI artifact does not close the remaining compatibility, canonical, platform, schema, or registry-parity gates;
+- the published `0.1.0` artifact predates the repository's package export metadata and packed-install evidence;
 - schema validation is not part of the executable test suite.
 
 The bounded catalogue and lexical semantics are intentional scope limits, not defects to silently remove.
@@ -61,7 +61,7 @@ Runtime: Node.js `>=18.18.0`. Development: TypeScript `^5.7.0` and `@types/node 
 
 ## Next steps
 
-1. Decide CLI-only versus library package surface and add the corresponding smoke test/metadata if library use is required.
+1. Publish a new authorized version because the published 0.1.0 artifact predates the repository metadata and documentation fixes.
 2. Add executable JSON Schema validation and negative contract tests.
 3. Confirm canonical Hub/repository ownership and admission.
 4. Run authorized Lucee/Adobe and non-Windows verification.

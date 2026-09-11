@@ -4,11 +4,11 @@
 **Version:** `0.1.0`
 **Working-tree state:** documentation changes for the post-publication status are not yet committed
 **Published artifact:** `agent-cfml-check@0.1.0` verified from npm registry
-**Publication note:** the immutable registry README/SPEC predates this post-publication documentation sync and may require a new version for parity
+**Publication note:** the immutable registry README/SPEC/package metadata predates this post-publication repository sync and may require a new version for parity
 
 ## Executive status
 
-The deterministic feasibility slice is complete and locally verified. The CLI artifact is published, but the project is not yet fully release-ready because compatibility, canonical ownership/admission, package surface, cross-platform, and schema-validation gates remain open.
+The deterministic feasibility slice is complete and locally verified. The CLI artifact is published, repository package exports and GitHub onboarding are implemented, but the project is not yet fully release-ready because compatibility, canonical ownership/admission, cross-platform, schema-validation, and registry-parity gates remain open.
 
 ## Completed implementation
 
@@ -24,18 +24,21 @@ The deterministic feasibility slice is complete and locally verified. The CLI ar
 
 ## Verified evidence
 
-- `npm test`: 17/17 passed;
+- `npm test`: 19/19 passed after package-surface coverage;
 - `npm run typecheck`: passed;
 - `npm pack --dry-run --json`: passed;
 - capabilities, valid fixture, and misnested fixture CLI probes: passed on Windows;
+- package metadata self-reference test: passed;
+- temporary packed-install CLI and library import smoke checks: passed;
+- GitHub CI workflow and repository-local skill are present but not yet remotely executed;
 - working tree excludes `node_modules` and temporary `.test-dist/` output;
 - `npm whoami` and `npm view agent-cfml-check@0.1.0` verify the published registry artifact.
 
 ## Open work
 
-1. Decide CLI-only versus library package surface. `src/index.ts` exports library functions, but `package.json` has no `main`/`exports` and installed-package imports are not verified.
+1. Publish a new authorized version because the published `0.1.0` artifact predates the repository's `main`/`types`/`exports` metadata and later documentation.
 2. Add executable JSON Schema validation and broader negative contract tests.
-3. Run packed-install CLI smoke tests.
+3. Run the GitHub CI workflow on the pushed changes.
 4. Confirm canonical Hub/repository identity and admission.
 5. Run authorized Lucee, Adobe ColdFusion, and independent non-Windows verification.
 6. Compare published README/SPEC with the current tree, then perform post-publication provenance/install review; use a new authorized version if registry documentation needs correction.
@@ -47,8 +50,8 @@ No local implementation failure is known. Remaining blockers are external eviden
 ## Progress accounting
 
 - Feasibility implementation: **100% complete**.
-- Release gate path: **3/8 gates passed** (implementation regression, package assembly, and CLI publication), or **37.5%** by gate count. This is a planning indicator, not a quality score.
+- Release gate path: **4/8 gates passed** (implementation regression, package assembly, package surface/packed-install, and CLI publication), or **50%** by gate count. Remote CI, schema, compatibility, canonical ownership/admission, and registry parity remain open. This is a planning indicator, not a quality score.
 
 ## Next action
 
-Resolve the CLI-only versus library-package decision, then add packed-install and contract-validation tests before pursuing external compatibility and canonical admission.
+Run the GitHub CI workflow, update the KB Tool/Skill records, and publish a new authorized version before pursuing external compatibility and canonical admission.

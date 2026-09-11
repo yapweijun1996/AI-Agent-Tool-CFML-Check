@@ -17,14 +17,15 @@ Version `0.1.0` contains the first feasibility slice and has been published to t
 - explicit-root path safety, source stability checks, input validation, output limits, nesting limits, finding limits, and time limits;
 - deterministic JSON and text CLI output.
 
-Verification at repository commit `1d5c768`:
+Local verification before this documentation update:
 
-- `npm test`: 17/17 passed;
+- `npm test`: 19/19 passed;
 - `npm run typecheck`: passed;
 - `npm pack --dry-run --json`: passed;
-- capabilities, valid-fixture, and misnested-fixture CLI checks: passed.
+- capabilities, valid-fixture, and misnested-fixture CLI checks: passed;
+- temporary packed-install CLI and library import smoke checks: passed.
 
-The npm publication of `agent-cfml-check@0.1.0` is verified by registry readback. The immutable registry artifact was published before this post-publication documentation status sync, so its README/SPEC may predate the current working-tree wording; a new authorized version is required to update registry documentation. This is not a complete CFML parser or evidence of Lucee/Adobe ColdFusion compatibility. Hub lifecycle, canonical ownership, admission, cross-platform compatibility, and library-package exports remain outside the current verified evidence.
+The npm publication of `agent-cfml-check@0.1.0` is verified by registry readback. The immutable registry artifact was published before later repository changes, so its README/SPEC and package exports may predate the current working-tree wording; a new authorized version is required to update registry documentation and package metadata. This is not a complete CFML parser or evidence of Lucee/Adobe ColdFusion compatibility. Hub lifecycle, canonical ownership, admission, and cross-platform compatibility remain outside the current verified evidence.
 
 ## Install and use
 
@@ -38,7 +39,7 @@ node dist/cli/index.js check --root . fixtures/valid.cfm --json
 node dist/cli/index.js check --root . fixtures/misnested.cfm --json
 ```
 
-The package requires Node.js `>=18.18.0`. It has no runtime npm dependencies; TypeScript and Node.js type definitions are development dependencies.
+The package requires Node.js `>=18.18.0`. It has no runtime npm dependencies; TypeScript and Node.js type definitions are development dependencies. The repository package metadata now exposes `dist/index.js` and `dist/index.d.ts` through `main`, `types`, and `exports`; temporary packed-install CLI and library import smoke checks pass. The already published `0.1.0` artifact predates this fix.
 
 The CLI supports:
 
@@ -67,8 +68,10 @@ The supported profile is `cfml-structure-v1`. Unknown/custom/imported tags, opti
 - `src/cli/index.ts`: CLI argument parsing and rendering;
 - `schema/`: JSON Schema for result envelopes;
 - `fixtures/`: valid and misnested examples;
-- `test/`: implementation and CLI tests;
+- `test/`: implementation, CLI, and package-surface tests;
+- `skills/agent-cfml-check/SKILL.md`: repository-local Agent usage workflow;
+- `.github/workflows/ci.yml`: Node 18/20/22 CI and CLI smoke checks;
 - `dist/`: generated package output;
 - `DESIGN.md`, `EPIC.md`, `ROADMAP.md`, `TASK.md`, `GOAL.md`, `PROGRESS.md`, `GOAL_PROMPT.md`, `CHANGELOG.md`: repository design, planning, status, and maintenance documents.
 
-`package.json` currently publishes `dist`, `README.md`, `SPEC.md`, `schema`, and `fixtures`; the design, planning, progress, goal, prompt, and changelog documents remain repository-maintainer documentation. Although `src/index.ts` contains TypeScript exports, installed-package library imports are not documented as supported until `main`/`exports` are added and tested.
+`package.json` currently publishes `dist`, `README.md`, `SPEC.md`, `schema`, and `fixtures`; the design, planning, progress, goal, prompt, changelog, and Agent Skill documents remain repository-maintainer documentation. The repository now exposes the TypeScript library through `main`, `types`, and `exports`, with package-surface tests; the published `0.1.0` artifact predates this fix and requires a new authorized version for registry consumers.

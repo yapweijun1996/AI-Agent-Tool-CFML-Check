@@ -78,7 +78,7 @@ The core is synchronous and has no runtime npm dependency, network call, databas
 
 ## 6. Package surface decision
 
-The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `src/index.ts` exports `capabilities`, `checkFile`, limits, and types, but `package.json` currently declares neither `main` nor `exports`. Therefore an installed-package library import is not yet a supported or verified contract. Before documenting library consumption or releasing a library surface, either add and test package exports or explicitly scope the product as CLI-only. The CLI artifact itself is published as `agent-cfml-check@0.1.0`.
+The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `src/index.ts` exports `capabilities`, `checkFile`, limits, and types. The repository declares `main`, `types`, and conditional `exports` for the library entry. Package-surface tests and a temporary packed-install CLI/library smoke check verify the current repository artifact. The already published `agent-cfml-check@0.1.0` artifact predates this metadata fix, so a new authorized package version is still required before claiming the npm registry library surface.
 
 ## 7. Dependencies
 
@@ -96,9 +96,9 @@ The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `
 - The tag catalogue is incomplete and unknown/custom/imported tags fail closed.
 - The lexical scanner does not establish full CFML string/expression semantics.
 - Lucee and Adobe ColdFusion behavior is unverified.
-- Non-Windows behavior, canonical Hub ownership, admission, and package-import behavior are unverified; npm publication of the CLI artifact is verified.
+- Non-Windows behavior, canonical Hub ownership, admission, and registry parity are unverified; npm publication of the CLI artifact and the current repository's packed-install behavior are verified.
 - Expanding grammar, adding include/project analysis, or adding semantic validation requires a new versioned contract, privacy/resource model, and regression evidence.
 
 ## 9. Current evidence
 
-At implementation baseline `1d5c768`, `npm test` passes 17/17, `npm run typecheck` passes, `npm pack --dry-run --json` passes, and capabilities/valid/misnested CLI probes pass on Windows. Registry readback also verifies `agent-cfml-check@0.1.0` and its tarball. The immutable registry artifact predates this post-publication documentation sync, so registry README/SPEC parity is an open release-integrity check. These checks prove local implementation and CLI publication evidence only; they do not prove engine compatibility or complete release readiness.
+At the pre-onboarding implementation baseline, `npm test` passed 17/17. The current repository adds package-surface coverage and passes 19/19. `npm run typecheck`, `npm pack --dry-run --json`, capabilities/valid/misnested CLI probes, and temporary packed-install CLI/library smoke checks also pass. Registry readback also verifies `agent-cfml-check@0.1.0` and its tarball. The immutable registry artifact predates this post-publication documentation sync, so registry README/SPEC parity is an open release-integrity check. These checks prove local implementation and CLI publication evidence only; they do not prove engine compatibility or complete release readiness.
