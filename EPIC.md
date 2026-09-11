@@ -1,7 +1,7 @@
 # Epic: Agent CFML Check Feasibility and Release Readiness
 
 **Epic ID:** `CFML-CHECK-001`
-**Implementation baseline:** `0.1.0` at commit `1d5c768`
+**Implementation baseline:** `0.1.1` release-hardening commit pending
 **Status:** feasibility complete; CLI package published; release hardening pending
 
 ## Goal
@@ -21,17 +21,17 @@ Deliver a deterministic, read-only `agent-cfml-check` tool that establishes boun
 | Recognized pure-script `.cfc` handling | Done | Component/interface test |
 | UTF-8 positions, byte ranges, hash, and limits | Done | SourceIndex, reader, checker |
 | Deterministic JSON/text CLI behavior | Done | CLI tests and smoke checks |
-| Local regression | Done | `npm test` 19/19 after package-surface coverage; typecheck pass |
+| Local regression | Done | `npm test` 22/22 after schema coverage; typecheck pass |
 | Package assembly dry-run | Done | `npm pack --dry-run --json` pass |
 | Documentation synchronization | Done in working tree | DESIGN/SPEC/EPIC/ROADMAP/TASK/GOAL/PROGRESS/GOAL_PROMPT aligned to code |
-| JSON Schema executable validation | Pending | Add validator-backed tests |
+| JSON Schema executable validation | Done | Ajv validates capabilities, pass, violations, incomplete, error, and negative envelopes |
 | Installed-package CLI/library smoke test | Done locally | Temporary packed install runs the CLI and resolves the exported library entry |
-| Library package export contract | Done locally | `main`, `types`, and `exports` added; package self-reference and temporary packed-install import tests pass; published 0.1.0 predates the fix |
-| Lucee compatibility | Pending | Authorized engine matrix required |
+| Library package export contract | Done | `main`, `types`, and `exports` added; package self-reference and temporary packed-install import tests pass; release package is 0.1.1 |
+| Lucee compatibility | Partial | Targeted Lucee 6.2.2.91 probe passes; full authorized engine matrix required |
 | Adobe ColdFusion compatibility | Pending | Authorized engine matrix required |
 | Canonical Hub/repository handoff | Pending | External ownership/admission evidence required |
-| Independent non-Windows verification | Pending | Clean-checkout evidence required |
-| Public CLI package publication | Done | npm identity and registry readback verify `agent-cfml-check@0.1.0` and its tarball |
+| Independent non-Windows verification | Done targeted | Ubuntu WSL Node 18.19.1 npm ci, 22/22 tests, and typecheck pass; broader platform matrix is not claimed |
+| Public CLI package publication | Pending final readback | 0.1.1 release package prepared; authenticated registry version, tarball, and integrity readback required |
 | Published artifact documentation/package parity | Pending | Compare registry README/SPEC/exports with current repository; use a new authorized version if correction is required |
 
 ## Completed work
@@ -46,12 +46,12 @@ Deliver a deterministic, read-only `agent-cfml-check` tool that establishes boun
 
 No local implementation check is failing. Release readiness is blocked by missing external evidence or decisions:
 
-- engine compatibility is unverified;
+- only a targeted Lucee probe is verified; full engine compatibility and Adobe ColdFusion compatibility are unverified;
 - canonical Hub/repository ownership and admission are unconfirmed;
-- cross-platform evidence is absent;
+- broader cross-platform coverage beyond Ubuntu WSL is absent;
 - the published CLI artifact does not close the remaining compatibility, canonical, platform, schema, or registry-parity gates;
-- the published `0.1.0` artifact predates the repository's package export metadata and packed-install evidence;
-- schema validation is not part of the executable test suite.
+- the prior published `0.1.0` artifact predates the repository's package export, schema, and documentation hardening;
+- full Lucee/Adobe engine compatibility and broader platform coverage remain unverified.
 
 The bounded catalogue and lexical semantics are intentional scope limits, not defects to silently remove.
 
@@ -61,7 +61,7 @@ Runtime: Node.js `>=18.18.0`. Development: TypeScript `^5.7.0` and `@types/node 
 
 ## Next steps
 
-1. Publish a new authorized version because the published 0.1.0 artifact predates the repository metadata and documentation fixes.
+1. Record the release commit and final registry parity readback for `0.1.1`.
 2. Add executable JSON Schema validation and negative contract tests.
 3. Confirm canonical Hub/repository ownership and admission.
 4. Run authorized Lucee/Adobe and non-Windows verification.

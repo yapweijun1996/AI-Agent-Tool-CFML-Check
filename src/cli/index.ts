@@ -2,6 +2,7 @@
 import { capabilities, checkFile } from "../core/checker.js";
 import { DEFAULT_LIMITS } from "../core/limits.js";
 import { ToolFailure } from "../schema/errors.js";
+import { TOOL_ID, TOOL_VERSION } from "../schema/types.js";
 import type { CheckLimits, Envelope } from "../schema/types.js";
 import { pathToFileURL } from "node:url";
 import path from "node:path";
@@ -126,7 +127,7 @@ export function main(argv: readonly string[] = process.argv.slice(2)): number {
       return 0;
     }
     if (args.version) {
-      process.stdout.write(`${"0.1.0"}\n`);
+      process.stdout.write(`${TOOL_VERSION}\n`);
       return 0;
     }
     const result = args.operation === "capabilities"
@@ -140,7 +141,7 @@ export function main(argv: readonly string[] = process.argv.slice(2)): number {
     const failure = error instanceof ToolFailure ? error : new ToolFailure("INTERNAL_ERROR", "The CLI failed without a safe result", 1);
     const envelope: Envelope<null> = {
       schema_version: "1.0.0",
-      tool: { id: "agent-cfml-check", version: "0.1.0" },
+      tool: { id: TOOL_ID, version: TOOL_VERSION },
       status: "error",
       complete: false,
       data: null,

@@ -4,7 +4,7 @@
 
 Deliver a trustworthy `agent-cfml-check` tool that deterministically checks bounded CFML structure without executing source or claiming runtime compatibility that has not been tested.
 
-The immediate target is a verified `0.1.0` feasibility product and a clearly bounded release path. The CLI artifact is now published; grammar expansion and semantic/runtime analysis are separate future scopes.
+The immediate target is a verified `0.1.1` feasibility product and a clearly bounded release path. The CLI artifact is published; grammar expansion and semantic/runtime analysis are separate future scopes.
 
 ## Verification surface
 
@@ -12,7 +12,7 @@ Completion is evaluated against:
 
 - repository source, generated `dist/`, package metadata, and JSON Schema;
 - unit and CLI regression tests;
-- typecheck, clean packed-install smoke, and schema validation;
+- typecheck, clean packed-install smoke, and executable schema validation;
 - authorized Lucee and Adobe ColdFusion compatibility evidence;
 - independent platform evidence;
 - canonical Hub/repository ownership, admission, provenance, and publication evidence; publication is satisfied for the current CLI artifact by npm registry readback.
@@ -27,7 +27,7 @@ Completion is evaluated against:
 
 ## Boundaries
 
-The current profile excludes full CFML grammar, expression/type/runtime semantics, HTML/SQL validity, directory/project analysis, include expansion, engine compatibility, and custom/imported tags. Repository package exports and temporary packed-install CLI/library imports are verified; registry parity remains required before treating npm library imports as released support.
+The current profile excludes full CFML grammar, expression/type/runtime semantics, HTML/SQL validity, directory/project analysis, include expansion, engine compatibility, and custom/imported tags. Repository package exports, executable schema validation, and temporary packed-install CLI/library imports are verified; registry parity for the current release must still be read back.
 
 ## Iteration policy
 
@@ -39,4 +39,4 @@ Stop and report evidence gathered, attempted paths, blocker, and required input 
 
 ## Current stage
 
-The local feasibility implementation and CLI publication are complete. Contract hardening and external compatibility/canonical evidence remain pending.
+The local feasibility implementation, contract hardening, and CLI publication are complete. External compatibility and canonical evidence remain pending.

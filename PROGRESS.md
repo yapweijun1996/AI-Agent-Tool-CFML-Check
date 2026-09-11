@@ -1,14 +1,14 @@
 # Agent CFML Check Progress
 
-**Reviewed against:** implementation baseline `1d5c768`
-**Version:** `0.1.0`
-**Working-tree state:** documentation changes for the post-publication status are not yet committed
-**Published artifact:** `agent-cfml-check@0.1.0` verified from npm registry
-**Publication note:** the immutable registry README/SPEC/package metadata predates this post-publication repository sync and may require a new version for parity
+**Reviewed against:** release-hardening source; final commit pending
+**Version:** `0.1.1`
+**Working-tree state:** release-hardening changes pending commit
+**Published artifact:** `agent-cfml-check@0.1.1` pending final registry readback
+**Publication note:** the prior immutable `0.1.0` artifact predates the release-hardening changes
 
 ## Executive status
 
-The deterministic feasibility slice is complete and locally verified. The CLI artifact is published, repository package exports and GitHub onboarding are implemented, but the project is not yet fully release-ready because compatibility, canonical ownership/admission, cross-platform, schema-validation, and registry-parity gates remain open.
+The deterministic feasibility slice and release hardening are locally verified. Targeted Lucee and Ubuntu WSL evidence now pass. The project is not yet fully release-ready because full engine compatibility, Adobe ColdFusion, canonical ownership/admission, and registry-parity gates remain open.
 
 ## Completed implementation
 
@@ -24,34 +24,36 @@ The deterministic feasibility slice is complete and locally verified. The CLI ar
 
 ## Verified evidence
 
-- `npm test`: 19/19 passed after package-surface coverage;
+- `npm test`: 22/22 passed after schema coverage;
 - `npm run typecheck`: passed;
 - `npm pack --dry-run --json`: passed;
 - capabilities, valid fixture, and misnested fixture CLI probes: passed on Windows;
 - package metadata self-reference test: passed;
 - temporary packed-install CLI and library import smoke checks: passed;
-- GitHub CI workflow and repository-local skill are present but not yet remotely executed;
+- JSON Schema validation: passed for capabilities, completed, incomplete/error, and a negative envelope;
+- targeted Lucee 6.2.2.91 execution probe: passed;
+- Ubuntu WSL Node 18.19.1 npm ci, 22/22 tests, and typecheck: passed;
+- repository-local Agent Skill is present;
+- GitHub CI for commit c76b8be: completed successfully; 0.1.1 release-hardening CI is pending the new push;
 - working tree excludes `node_modules` and temporary `.test-dist/` output;
-- `npm whoami` and `npm view agent-cfml-check@0.1.0` verify the published registry artifact.
+- `npm whoami` verifies the authenticated npm identity; 0.1.1 registry readback is pending publication;
 
 ## Open work
 
-1. Publish a new authorized version because the published `0.1.0` artifact predates the repository's `main`/`types`/`exports` metadata and later documentation.
-2. Add executable JSON Schema validation and broader negative contract tests.
-3. Run the GitHub CI workflow on the pushed changes.
-4. Confirm canonical Hub/repository identity and admission.
-5. Run authorized Lucee, Adobe ColdFusion, and independent non-Windows verification.
-6. Compare published README/SPEC with the current tree, then perform post-publication provenance/install review; use a new authorized version if registry documentation needs correction.
+1. Push the release-hardening commit and let its GitHub CI complete.
+2. Publish 0.1.1 and complete registry readback/documentation parity review.
+3. Confirm canonical Hub/repository identity and admission.
+4. Run the full authorized Lucee/Adobe compatibility matrix when Adobe ColdFusion is available.
 
 ## Blockers
 
-No local implementation failure is known. Remaining blockers are external evidence, package metadata/contract decisions, canonical ownership, validation coverage, and release authorization.
+No local implementation failure is known. Remaining blockers are Adobe ColdFusion access, full engine-matrix evidence, canonical ownership/admission, and registry parity.
 
 ## Progress accounting
 
 - Feasibility implementation: **100% complete**.
-- Release gate path: **4/8 gates passed** (implementation regression, package assembly, package surface/packed-install, and CLI publication), or **50%** by gate count. Remote CI, schema, compatibility, canonical ownership/admission, and registry parity remain open. This is a planning indicator, not a quality score.
+- Release gate path: **6/8 gates passed** (implementation regression, package assembly, executable schema, package surface/packed-install, publication, and GitHub CI), or **75%** by gate count. Full engine compatibility, Adobe compatibility, canonical ownership/admission, and registry parity remain open. This is a planning indicator, not a quality score.
 
 ## Next action
 
-Run the GitHub CI workflow, update the KB Tool/Skill records, and publish a new authorized version before pursuing external compatibility and canonical admission.
+Complete registry parity review, then pursue external compatibility and canonical admission.

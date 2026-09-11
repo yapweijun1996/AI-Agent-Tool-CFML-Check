@@ -1,6 +1,6 @@
 # Agent CFML Check Roadmap
 
-**Implementation baseline:** `0.1.0` at commit `1d5c768`
+**Implementation baseline:** `0.1.1` release-hardening commit pending
 **Overall state:** local feasibility complete; CLI package published; release hardening pending
 
 ## Phase 0 — Feasibility implementation (Complete)
@@ -12,7 +12,7 @@
 - Provide deterministic CLI capabilities/check operations, text/JSON output, typed source exports, schema, fixtures, tests, and generated `dist/`.
 - Synchronize maintainer documentation.
 
-Evidence: 19/19 tests, typecheck, package dry-run, and Windows CLI probes pass.
+Evidence: 22/22 tests, typecheck, package dry-run, Windows CLI probes, schema validation, and packed-install smoke pass.
 
 ## Phase 1 — Contract hardening and release readiness (Pending)
 
@@ -20,12 +20,12 @@ Evidence: 19/19 tests, typecheck, package dry-run, and Windows CLI probes pass.
 
 - Package metadata now declares `main`, `types`, and `exports`; local self-reference tests pass.
 - Temporary packed-install CLI and library import smoke checks pass.
-- Publish a new authorized version because npm `0.1.0` predates the export metadata.
+- Release target `0.1.1` is prepared; verify final registry metadata and documentation parity after publication.
 - Keep `dist/` aligned with source.
 
 ### 1.2 Contract validation
 
-- Add executable JSON Schema validation for capabilities, pass, violations, and incomplete/error envelopes.
+- Executable Ajv validation covers capabilities, pass, violations, incomplete/error, and a negative envelope.
 - Add negative tests for all documented input, limit, path, and exit-code boundaries.
 - Verify `--help`, `--version`, pretty JSON, tiny output limits, BOM, line endings, and deterministic repeated runs.
 
@@ -36,18 +36,18 @@ Evidence: 19/19 tests, typecheck, package dry-run, and Windows CLI probes pass.
 
 ### 1.4 Engine and platform evidence
 
-- Define and run an authorized supported-profile matrix against Lucee and Adobe ColdFusion.
-- Run clean-checkout install/build/test/CLI probes on an independent non-Windows platform.
+- Targeted Lucee `6.2.2.91` probe passes; define and run the full authorized supported-profile matrix against Lucee and Adobe ColdFusion.
+- Ubuntu WSL Node `18.19.1` clean dependency install, test, and typecheck pass; broader platform coverage remains optional evidence.
 - Record compatibility differences as profile changes, exclusions, or a new version.
 
 ### 1.5 Publication
 
-**Status: Complete for the `0.1.0` CLI artifact; broader release gates remain open.**
+**Status: Pending final `0.1.1` registry readback; broader release gates remain open.**
 
-- npm authentication and registry readback verify `agent-cfml-check@0.1.0`.
+- npm authentication is verified; `agent-cfml-check@0.1.1` registry version, tarball, and integrity readback remain required.
 - The published tarball and integrity metadata are available from the npm registry.
 - Publication does not close the remaining contract, compatibility, canonical, platform, or library-package gates.
-- Compare the immutable registry README/SPEC/exports with the current repository docs; use a new authorized version if registry documentation or metadata must be corrected.
+- Compare the immutable registry README/SPEC/exports with the current repository docs after publication.
 - For future releases, confirm registry, provenance, package metadata, release authorization, and release checks before publishing.
 
 ## Phase 2 — Contract evolution (Unscheduled)
@@ -60,11 +60,11 @@ Evidence: 19/19 tests, typecheck, package dry-run, and Windows CLI probes pass.
 
 1. implementation regression — passed;
 2. package assembly — passed by dry-run;
-3. contract/schema validation — pending;
-4. package surface metadata and packed-install smoke — passed locally; registry parity remains pending;
-5. engine compatibility — pending;
+3. contract/schema validation — passed with Ajv;
+4. package surface metadata, schema validation, and packed-install smoke — passed locally; registry parity remains pending;
+5. engine compatibility — targeted Lucee probe passed; full Lucee/Adobe matrix pending;
 6. canonical Hub/repository — pending;
-7. cross-platform — pending;
-8. publication/operations — CLI publication passed; registry documentation parity and broader release operations remain pending.
+7. cross-platform — Ubuntu WSL evidence passed; broader matrix pending;
+8. publication/operations — 0.1.0 CLI publication passed; 0.1.1 publication and registry documentation parity remain pending.
 
 No publication date or compatibility promise is implied.

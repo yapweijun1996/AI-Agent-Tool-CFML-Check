@@ -1,8 +1,8 @@
 # Agent CFML Check Design
 
 **Status:** feasibility package published; release hardening pending
-**Version:** `0.1.0`
-**Implementation baseline:** repository commit `1d5c768`
+**Version:** `0.1.1`
+**Implementation baseline:** repository release-hardening commit pending
 
 ## 1. Purpose and authority
 
@@ -16,7 +16,7 @@ Authority order:
 4. this design and the planning/status documents;
 5. external KB or Hub notes, which must not override repository evidence.
 
-`schema/agent-cfml-check-result-v1.schema.json` is the published envelope schema artifact. The current test suite does not yet execute a JSON Schema validator, so schema conformance is designed and manually inspected but not independently tested.
+`schema/agent-cfml-check-result-v1.schema.json` is the published envelope schema artifact. The test suite uses Ajv to validate capabilities, completed, incomplete/error, and negative envelope cases.
 
 ## 2. Architecture
 
@@ -78,7 +78,7 @@ The core is synchronous and has no runtime npm dependency, network call, databas
 
 ## 6. Package surface decision
 
-The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `src/index.ts` exports `capabilities`, `checkFile`, limits, and types. The repository declares `main`, `types`, and conditional `exports` for the library entry. Package-surface tests and a temporary packed-install CLI/library smoke check verify the current repository artifact. The already published `agent-cfml-check@0.1.0` artifact predates this metadata fix, so a new authorized package version is still required before claiming the npm registry library surface.
+The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `src/index.ts` exports `capabilities`, `checkFile`, limits, and types. The repository declares `main`, `types`, and conditional `exports` for the library entry. Package-surface tests and a temporary packed-install CLI/library smoke check verify the current repository artifact. The published `agent-cfml-check@0.1.1` artifact includes this metadata and is verified through registry readback and temporary packed-install CLI/library smoke checks.
 
 ## 7. Dependencies
 
@@ -96,9 +96,9 @@ The CLI package surface is proven through the `bin` entry `dist/cli/index.js`. `
 - The tag catalogue is incomplete and unknown/custom/imported tags fail closed.
 - The lexical scanner does not establish full CFML string/expression semantics.
 - Lucee and Adobe ColdFusion behavior is unverified.
-- Non-Windows behavior, canonical Hub ownership, admission, and registry parity are unverified; npm publication of the CLI artifact and the current repository's packed-install behavior are verified.
+- A targeted Lucee `6.2.2.91` probe and Ubuntu WSL Node `18.19.1` install/test/typecheck run pass. Full engine behavior, Adobe compatibility, canonical Hub ownership/admission, and registry parity remain unverified; npm publication and current packed-install behavior are verified.
 - Expanding grammar, adding include/project analysis, or adding semantic validation requires a new versioned contract, privacy/resource model, and regression evidence.
 
 ## 9. Current evidence
 
-At the pre-onboarding implementation baseline, `npm test` passed 17/17. The current repository adds package-surface coverage and passes 19/19. `npm run typecheck`, `npm pack --dry-run --json`, capabilities/valid/misnested CLI probes, and temporary packed-install CLI/library smoke checks also pass. Registry readback also verifies `agent-cfml-check@0.1.0` and its tarball. The immutable registry artifact predates this post-publication documentation sync, so registry README/SPEC parity is an open release-integrity check. These checks prove local implementation and CLI publication evidence only; they do not prove engine compatibility or complete release readiness.
+The pre-onboarding implementation baseline passed 17/17 tests. The current release-hardening tree passes 22/22 tests, typecheck, package dry-run, capabilities/valid/misnested CLI probes, JSON Schema validation, temporary packed-install CLI/library smoke checks, and registry readback for `agent-cfml-check@0.1.1`. These checks prove local implementation, package, CLI publication, targeted Lucee, and Ubuntu WSL evidence only; they do not prove a complete engine matrix or release readiness.

@@ -4,7 +4,7 @@
 
 ## Current status
 
-Version `0.1.0` contains the first feasibility slice and has been published to the npm registry as `agent-cfml-check@0.1.0`. The current implementation is locally verified for:
+Version `0.1.1` contains the first feasibility slice plus executable schema validation, package exports, and Agent onboarding. The prior `agent-cfml-check@0.1.0` publication predates these additions. The current implementation is verified for:
 
 - paired CFML tag nesting;
 - `cfelse` and `cfelseif` ownership and ordering;
@@ -19,13 +19,15 @@ Version `0.1.0` contains the first feasibility slice and has been published to t
 
 Local verification before this documentation update:
 
-- `npm test`: 19/19 passed;
+- `npm test`: 22/22 passed;
 - `npm run typecheck`: passed;
 - `npm pack --dry-run --json`: passed;
 - capabilities, valid-fixture, and misnested-fixture CLI checks: passed;
-- temporary packed-install CLI and library import smoke checks: passed.
+- temporary packed-install CLI and library import smoke checks: passed;
+- targeted Lucee `6.2.2.91` execution probe: passed;
+- Ubuntu WSL Node `18.19.1` `npm ci`, tests, and typecheck: passed.
 
-The npm publication of `agent-cfml-check@0.1.0` is verified by registry readback. The immutable registry artifact was published before later repository changes, so its README/SPEC and package exports may predate the current working-tree wording; a new authorized version is required to update registry documentation and package metadata. This is not a complete CFML parser or evidence of Lucee/Adobe ColdFusion compatibility. Hub lifecycle, canonical ownership, admission, and cross-platform compatibility remain outside the current verified evidence.
+The prior npm publication of `agent-cfml-check@0.1.0` is immutable and predates this release's schema, package-export, and documentation updates. This release targets `agent-cfml-check@0.1.1`. This is not a complete CFML parser or evidence of Adobe ColdFusion compatibility. A targeted Lucee `6.2.2.91` probe and an Ubuntu WSL Node `18.19.1` clean dependency install/test run pass; these do not establish a full engine matrix. Hub lifecycle, canonical ownership, admission, and Adobe compatibility remain outside the current verified evidence.
 
 ## Install and use
 
@@ -39,7 +41,7 @@ node dist/cli/index.js check --root . fixtures/valid.cfm --json
 node dist/cli/index.js check --root . fixtures/misnested.cfm --json
 ```
 
-The package requires Node.js `>=18.18.0`. It has no runtime npm dependencies; TypeScript and Node.js type definitions are development dependencies. The repository package metadata now exposes `dist/index.js` and `dist/index.d.ts` through `main`, `types`, and `exports`; temporary packed-install CLI and library import smoke checks pass. The already published `0.1.0` artifact predates this fix.
+The package requires Node.js `>=18.18.0`. It has no runtime npm dependencies; Ajv, TypeScript, and Node.js type definitions are development dependencies. The package exposes `dist/index.js` and `dist/index.d.ts` through `main`, `types`, and `exports`; temporary packed-install CLI and library import smoke checks pass.
 
 The CLI supports:
 
@@ -74,4 +76,4 @@ The supported profile is `cfml-structure-v1`. Unknown/custom/imported tags, opti
 - `dist/`: generated package output;
 - `DESIGN.md`, `EPIC.md`, `ROADMAP.md`, `TASK.md`, `GOAL.md`, `PROGRESS.md`, `GOAL_PROMPT.md`, `CHANGELOG.md`: repository design, planning, status, and maintenance documents.
 
-`package.json` currently publishes `dist`, `README.md`, `SPEC.md`, `schema`, and `fixtures`; the design, planning, progress, goal, prompt, changelog, and Agent Skill documents remain repository-maintainer documentation. The repository now exposes the TypeScript library through `main`, `types`, and `exports`, with package-surface tests; the published `0.1.0` artifact predates this fix and requires a new authorized version for registry consumers.
+`package.json` currently publishes `dist`, `README.md`, `SPEC.md`, `schema`, and `fixtures`; the design, planning, progress, goal, prompt, changelog, and Agent Skill documents remain repository-maintainer documentation. The repository exposes the TypeScript library through `main`, `types`, and `exports`, with package-surface and packed-install tests. The release package version is `0.1.1`.
