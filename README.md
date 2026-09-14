@@ -31,6 +31,18 @@ The prior npm publication of `agent-cfml-check@0.1.0` is immutable and predates 
 
 ## Install and use
 
+Install the published CLI globally for Codex CLI or any terminal session:
+
+```sh
+npm install --global agent-cfml-check@latest
+agent-cfml-check capabilities --json
+agent-cfml-check check --root /path/to/repository path/to/file.cfm --json
+```
+
+The global installation exposes the `agent-cfml-check` command from any working
+directory. For a checkout, use `npm ci`, `npm run build`, and the same command
+through `node dist/cli/index.js`.
+
 ```sh
 npm install
 npm test
